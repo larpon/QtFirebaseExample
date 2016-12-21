@@ -60,6 +60,7 @@ ios: {
 }
 
 # Make these modules of QtFirebase
+# NOTE QTFIREBASE_SDK_PATH can be symlinked to match $$PWD/firebase_cpp_sdk
 QTFIREBASE_CONFIG += analytics admob
 # include QtFirebase
 include(../extensions/QtFirebase/qtfirebase.pri)
