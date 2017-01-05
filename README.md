@@ -65,8 +65,31 @@ Example Qt app for the QtFirebase project
     # include QtFirebase
     include(../extensions/QtFirebase/qtfirebase.pri) # <- /path/to/QtFirebase
     ```
-
-4. Push the *Run* button
+    
+4. Almost done
+  
+  **Android notes**
+  
+  The project needs gradle and the Android NDK (r10d +) to build on Android.
+  
+  * Enable gradle in your Project build options in QtCreator.
+  * Edit path in `/path/to/projects/QtFirebaseExample/extensions/QtFirebase/src/android/gradle.properties`
+  * Edit path in `/path/to/projects/QtFirebaseExample/extensions/QtFirebase/src/android/local.properties`
+    
+  **iOS Notes**
+  
+  The project uses CocoaPods to build on iOS.
+  
+  * [Install CocoaPods](http://stackoverflow.com/questions/20755044/how-to-install-cocoa-pods) on your Mac host if you haven't already.
+  * Run `pod install`:
+   ```
+   # cd /path/to/QtFirebase/src/ios/CocoaPods
+   # From our example:
+   cd /path/to/projects/QtFirebaseExample/extensions/QtFirebase/src/ios/CocoaPods
+   pod install
+   ```
+  
+5. Push the *Run* button
 
   If you build for Android or iOS you should see output like the following in the "General Messages" tab of QtCreator
   ```
