@@ -63,7 +63,7 @@ Example Qt app for the QtFirebase project
     QTFIREBASE_SDK_PATH = /path/to/sdk/firebase_cpp_sdk
     QTFIREBASE_CONFIG += analytics admob
     # include QtFirebase
-    include(../extensions/QtFirebase/qtfirebase.pri) # <- /path/to/QtFirebase
+    include(../extensions/QtFirebase/qtfirebase.pri) # <- /path/to/QtFirebase/qtfirebase.pri
     ```
     
 4. Almost done
