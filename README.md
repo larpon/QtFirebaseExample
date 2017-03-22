@@ -26,8 +26,8 @@ Example Qt app for the QtFirebase project
 
   ```
   cd /path/to/download
-  wget https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_2.1.0.zip
-  unzip firebase_cpp_sdk_2.1.0.zip -d /path/to/sdk
+  wget https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_2.1.2.zip
+  unzip firebase_cpp_sdk_2.1.2.zip -d /path/to/sdk
   ```
 
 3. Add symlink OR set `QTFIREBASE_SDK_PATH` variable
