@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "564455235502",
+    "firebase_url": "https://qtfirebase-test.firebaseio.com",
+    "project_id": "qtfirebase-test",
+    "storage_bucket": "qtfirebase-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564455235502:android:866659afda570441",
+        "android_client_info": {
+          "package_name": "com.blackgrain.android.firebasetest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564455235502-vnfnbe5u6dchr81anq3g50q4cluhr12d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSBv91m7iGhWSldUP2WtnaG2u4Frk2rLY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
