@@ -15,9 +15,12 @@ include(deployment.pri)
 SOURCES += \
     main.cpp
 
+
+PLATFORMS_DIR = $$PWD/platforms
+
 android: {
 
-    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+    ANDROID_PACKAGE_SOURCE_DIR = $$PLATFORMS_DIR/android
 
     DISTFILES += \
         $$ANDROID_PACKAGE_SOURCE_DIR/AndroidManifest.xml \
@@ -34,16 +37,16 @@ android: {
 
 ios: {
 
-    ios_icon.files = $$files($$PWD/ios/icons/AppIcon*.png)
+    ios_icon.files = $$files($$PLATFORMS_DIR/ios/icons/AppIcon*.png)
     QMAKE_BUNDLE_DATA += ios_icon
 
-    itunes_icon.files = $$files($$PWD/ios/iTunesArtwork*)
+    itunes_icon.files = $$files($$PLATFORMS_DIR/ios/iTunesArtwork*)
     QMAKE_BUNDLE_DATA += itunes_icon
 
-    app_launch_images.files = $$PWD/ios/LauncherScreen.xib $$files($$PWD/ios/LaunchImage*.png) $$files($$PWD/ios/splash_*.png)
+    app_launch_images.files = $$PLATFORMS_DIR/ios/LauncherScreen.xib $$files($$PLATFORMS_DIR/ios/LaunchImage*.png) $$files($$PLATFORMS_DIR/ios/splash_*.png)
     QMAKE_BUNDLE_DATA += app_launch_images
 
-    QMAKE_INFO_PLIST = $$PWD/ios/Info.plist
+    QMAKE_INFO_PLIST = $$PLATFORMS_DIR/ios/Info.plist
 
     DISTFILES += \
         ios/Info.plist \
@@ -61,7 +64,7 @@ ios: {
 
 # Make these modules of QtFirebase
 # NOTE QTFIREBASE_SDK_PATH can be symlinked to match $$PWD/firebase_cpp_sdk
-QTFIREBASE_CONFIG += analytics admob
+QTFIREBASE_CONFIG += analytics admob remote_config
 # include QtFirebase
 include(../extensions/QtFirebase/qtfirebase.pri)
 
