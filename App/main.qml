@@ -22,7 +22,8 @@ ApplicationWindow {
         // NOTE All banners and interstitials will use this list
         // unless they have their own testDevices list specified
         testDevices: [
-            "01987FA9D5F5CEC3542F54FB2DDC89F6"
+            "01987FA9D5F5CEC3542F54FB2DDC89F6",
+            "d206f9511ffc1bc2c7b6d6e0d0e448cc"
         ]
     }
 
