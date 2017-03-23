@@ -4,3 +4,6 @@ SUBDIRS += \
 
 # Use ordered build, from first subdir (project_a) to the last (project_b):
 CONFIG += ordered
+
+DISTFILES += \
+    $$PWD/LICENSE
