@@ -159,6 +159,48 @@ ApplicationWindow {
         }
     }
 
+    RemoteConfig{
+        id: remoteConfig
+
+        onReadyChanged: {
+            console.log("RemoteConfig ready changed:"+ready);
+            if(ready)
+            {
+                //2. Init remote config with parameters you want to retrieve and default values
+                //default value returned if fetch config from server failed
+                addParameter("remote_config_test_long", 1);
+                addParameter("remote_config_test_boolean", false);
+                addParameter("remote_config_test_double", 3.14);
+                addParameter("remote_config_test_string","Default string");
+                //3. Initiate fetch (in this example set cache expiration time to 1 second)
+                //Be aware of set low cache expiration time since it will cause too much
+                //requests to server, and it may cause you will be blocked for some time.
+                //This called server throttling, server just refuse your requests for some time and
+                //then begin accept connections again
+                //Default time cache expiration is 12 hours
+
+                requestConfig(10);
+            }
+        }
+
+        onLoadedChanged: {
+            console.log("RemoteConfig loaded changed:"+loaded);
+            if(loaded)
+            {
+                //4. Retrieve data if loading success
+                console.log("RemoteConfig TestLong:" + remoteConfig.getParameterValue("remote_config_test_long"));
+                console.log("RemoteConfig TestBool:" + remoteConfig.getParameterValue("remote_config_test_boolean"));
+                console.log("RemoteConfig TestDouble:" + remoteConfig.getParameterValue("remote_config_test_double"));
+                console.log("RemoteConfig TestString:" + remoteConfig.getParameterValue("remote_config_test_string"));
+            }
+        }
+
+        onError:{
+            //5. Handle errors
+            console.log("RemoteConfig error:" + message);
+        }
+    }
+
     function getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;
     }
