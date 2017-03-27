@@ -14,8 +14,10 @@ ApplicationWindow {
     height: 832
 
     property bool paused: !Qt.application.active
-    //color: "tomato"
 
+    /*
+     * AdMob example
+     */
     AdMob {
         appId: Qt.platform.os == "android" ? "ca-app-pub-6606648560678905~6485875670" : "ca-app-pub-6606648560678905~1693919273"
 
@@ -107,7 +109,6 @@ ApplicationWindow {
         }
 
         onError: {
-            // TODO fix "undefined" arguments
             console.log("Interstitial failed with error code",code,"and message",message)
             // See AdMob.Error* enums
             if(code === AdMob.ErrorNetworkError)
@@ -115,6 +116,10 @@ ApplicationWindow {
         }
     }
 
+
+    /*
+     * Analytics example
+     */
     Analytics {
         id: analytics
 
@@ -123,7 +128,7 @@ ApplicationWindow {
 
         // App needs to be open at least 1s before logging a valid session
         minimumSessionDuration: 1000
-        // App session times out after 5s
+        // App session times out after 5s (5 seconds = 5000 milliseconds)
         sessionTimeout: 5000
 
         // Set the user ID:
@@ -160,45 +165,60 @@ ApplicationWindow {
         }
     }
 
+    /*
+     * RemoteConfig example
+     */
+
+    // Timer to poll for changes in RemoteConfig
+    Timer {
+        running: true
+        repeat: true
+        interval: 5 * 60 * 1000 // Poll for changes every 5th minute
+        onTriggered: remoteConfig.fetch()
+    }
+
     RemoteConfig{
         id: remoteConfig
 
+        // 1. Initialize parameters you would like to fetch from server and their default values
+        parameters: {
+            "remote_config_test_long": 1,
+            "remote_config_test_boolean": false,
+            "remote_config_test_double": 3.14,
+            "remote_config_test_string": "Default string",
+        }
+
+        // 2. Set cache expiration time in milliseconds, see step 3 for details about cache
+        cacheExpirationTime: 12*3600*1000 // 12 hours in milliseconds (suggested as default in firebase)
+
+        // 3. When remote config properly initialized request data from server
         onReadyChanged: {
             console.log("RemoteConfig ready changed:"+ready);
-            if(ready)
-            {
-                //2. Init remote config with parameters you want to retrieve and default values
-                //default value returned if fetch config from server failed
-                addParameter("remote_config_test_long", 1);
-                addParameter("remote_config_test_boolean", false);
-                addParameter("remote_config_test_double", 3.14);
-                addParameter("remote_config_test_string","Default string");
-                //3. Initiate fetch (in this example set cache expiration time to 1 second)
-                //Be aware of set low cache expiration time since it will cause too much
-                //requests to server, and it may cause you will be blocked for some time.
-                //This called server throttling, server just refuse your requests for some time and
-                //then begin accept connections again
-                //Default time cache expiration is 12 hours
-
-                requestConfig(10);
+            if(ready) {
+                remoteConfig.fetch();
+                // If the data in the cache was fetched no longer than cacheExpirationTime ago,
+                // this method will return the cached data. If not, a fetch from the
+                // Remote Config Server will be attempted.
+                // If you need to get data urgent use fetchNow(), it is equal to fetch() call with cacheExpirationTime=0
+                //
+                // IMPORTANT NOTE
+                // Be careful with urgent requests, too often requests will result in server throthling
+                // which means it will refuse connections for some time
             }
         }
 
-        onLoadedChanged: {
-            console.log("RemoteConfig loaded changed:"+loaded);
-            if(loaded)
-            {
-                //4. Retrieve data if loading success
-                console.log("RemoteConfig TestLong:" + remoteConfig.getParameterValue("remote_config_test_long"));
-                console.log("RemoteConfig TestBool:" + remoteConfig.getParameterValue("remote_config_test_boolean"));
-                console.log("RemoteConfig TestDouble:" + remoteConfig.getParameterValue("remote_config_test_double"));
-                console.log("RemoteConfig TestString:" + remoteConfig.getParameterValue("remote_config_test_string"));
-            }
+        // 4. If data was retrieved (both from server or cache) the handler will be called
+        // you can access data by accessing the "parameters" member variable
+        onParametersChanged: {
+            console.log("RemoteConfig test long", parameters["remote_config_test_long"]);
+            console.log("RemoteConfig test bool", parameters["remote_config_test_boolean"]);
+            console.log("RemoteConfig test double", parameters["remote_config_test_double"]);
+            console.log("RemoteConfig test string", parameters["remote_config_test_string"]);
         }
 
-        onError:{
-            //5. Handle errors
-            console.log("RemoteConfig error:" + message);
+        //5. Handle errors
+        onError: {
+            console.log("RemoteConfig error code:" + code + " message:" + message);
         }
     }
 
