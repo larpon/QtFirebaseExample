@@ -6,4 +6,5 @@ SUBDIRS += \
 CONFIG += ordered
 
 DISTFILES += \
-    $$PWD/LICENSE
+    $$PWD/LICENSE \
+    $$PWD/README.md

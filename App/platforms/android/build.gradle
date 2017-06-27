@@ -7,7 +7,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
 
-        classpath 'com.google.gms:google-services:3.0.0'
+        classpath 'com.google.gms:google-services:3.1.0'
     }
 }
 
@@ -84,11 +84,12 @@ dependencies {
     compile fileTree(dir: 'src', include: ['*.jar'])
 
     compile 'com.android.support:appcompat-v7:25.0.1'           // Optional??
-    compile 'com.google.android.gms:play-services-base:10.0.1'  // Mandatory - Firebase rely on Google Play services
+    compile 'com.google.android.gms:play-services-base:11.0.0'  // Mandatory - Firebase rely on Google Play services
 
-    compile 'com.google.firebase:firebase-ads:10.0.1'           // For AdMob support
-    compile 'com.google.firebase:firebase-analytics:10.0.1'     // For Google Analytics support
-    compile 'com.google.firebase:firebase-config:10.0.1'        // For RemoteConfig support
+    compile 'com.google.firebase:firebase-ads:11.0.0'           // For AdMob support
+    compile 'com.google.firebase:firebase-analytics:11.0.0'     // For Google Analytics support
+    //compile 'com.google.firebase:firebase-core:11.0.0'        // New recommended package for Google Analytics support
+    compile 'com.google.firebase:firebase-config:11.0.0'        // For RemoteConfig support
 
 }
 
