@@ -104,8 +104,8 @@ Example Qt app for the QtFirebase project
    libapp.a
    libremote_config.a
    ```
-   This step is important as the `make_ios_joined_statics.sh` uses `libtool` to gather each of the static libs used from each supported architecture into one static lib
-  
+   This step is important as the `make_ios_joined_statics.sh` uses `libtool` to join each of the static libs used from each supported architecture into one combined static lib to link against. We have yet to find out why this is necessary for the project to run properly.
+   
 5. Push the *Run* button
 
   If you build for Android or iOS you should see output like the following in the "General Messages" tab of QtCreator
