@@ -31,8 +31,11 @@ android: {
         $$ANDROID_PACKAGE_SOURCE_DIR/src/com/blackgrain/android/firebasetest/Main.java \
         $$ANDROID_PACKAGE_SOURCE_DIR/res/values/apptheme.xml \
         $$ANDROID_PACKAGE_SOURCE_DIR/res/values/strings.xml \
-        $$ANDROID_PACKAGE_SOURCE_DIR/res/drawable/splash.xml
-
+        $$ANDROID_PACKAGE_SOURCE_DIR/res/drawable/splash.xml \
+        $$ANDROID_PACKAGE_SOURCE_DIR/gradlew \
+        $$ANDROID_PACKAGE_SOURCE_DIR/gradlew.bat \
+        $$ANDROID_PACKAGE_SOURCE_DIR/gradle/wrapper/gradle-wrapper.jar \
+        $$ANDROID_PACKAGE_SOURCE_DIR/gradle/wrapper/gradle-wrapper.properties
 }
 
 ios: {
@@ -64,8 +67,8 @@ ios: {
 
 # Make these modules of QtFirebase
 # NOTE QTFIREBASE_SDK_PATH can be symlinked to match $$PWD/firebase_cpp_sdk
-QTFIREBASE_CONFIG += analytics admob remote_config
-# include QtFirebase
+QTFIREBASE_CONFIG += analytics messaging admob remote_config
+# Includes QtFirebase:
 include(../extensions/QtFirebase/qtfirebase.pri)
 
 RESOURCES += \

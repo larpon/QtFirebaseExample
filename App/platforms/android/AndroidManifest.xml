@@ -43,8 +43,27 @@
         </activity>
         -->
 
+
+        <!-- Firebase Messaging specific services -->
+        <service android:name="com.google.firebase.messaging.cpp.ListenerService" android:exported="false">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+          </intent-filter>
+        </service>
+
+        <service android:name="com.google.firebase.messaging.cpp.FcmInstanceIDListenerService" android:exported="false">
+          <intent-filter>
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+          </intent-filter>
+        </service>
+
+        <service android:name="com.google.firebase.messaging.cpp.RegistrationIntentService" android:exported="false">
+        </service>
+        <service android:name="com.google.firebase.messaging.MessageForwardingService" android:exported="false">
+        </service>
+
     </application>
-    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="23"/>
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="23"/>
     <supports-screens android:largeScreens="true" android:normalScreens="true" android:anyDensity="true" android:smallScreens="true"/>
 
     <!-- The following comment will be replaced upon deployment with default permissions based on the dependencies of the application.

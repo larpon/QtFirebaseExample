@@ -1,4 +1,4 @@
-import QtQuick 2.3
+import QtQuick 2.0
 import QtQuick.Controls 1.4
 
 import QtFirebase 1.0
@@ -219,6 +219,20 @@ ApplicationWindow {
         //5. Handle errors
         onError: {
             console.log("RemoteConfig error code:" + code + " message:" + message);
+        }
+    }
+
+    Messaging {
+        id: messaging
+
+        onReadyChanged: {
+            console.log("Messaging onReadyChanged", ready)
+        }
+        onTokenChanged: {
+            console.log("Messaging onTokenChanged", token)
+        }
+        onDataChanged: {
+            console.log("Messaging onDataChanged", JSON.stringify(data))
         }
     }
 
