@@ -116,6 +116,53 @@ ApplicationWindow {
         }
     }
 
+    AdMobNativeExpressAd {
+        id: nativeExpressAd
+        //adUnitId: Qt.platform.os == "android" ? "ca-app-pub-3940256099942544/6300978111" : "ca-app-pub-6606648560678905/3170652476"
+
+        x: 0
+        y: ready ? application.height-height : 0
+
+        visible: loaded
+
+        width: 320
+        height: 50
+
+        onReadyChanged: if(ready) load()
+
+        onError: {
+            // TODO fix "undefined" arguments
+            console.log("NativeExpressAd failed with error code",code,"and message",message)
+
+            // See AdMob.Error* enums
+            if(code === AdMob.ErrorNetworkError)
+                console.log("No network available");
+        }
+
+        request: AdMobRequest {
+            gender: AdMob.GenderFemale
+            childDirectedTreatment: AdMob.ChildDirectedTreatmentUnknown
+
+            // NOTE remember JS Date months are 0 based
+            // 1st of Januray 1980:
+            birthday: new Date(1980,0,1)
+
+            keywords: [
+                "AdMobNativeExpressAd",
+                "QML",
+                "Qt",
+                "Fun",
+                "Test",
+                "Firebase"
+            ]
+
+            extras: [
+                { "something_extra11": "extra_stuff11" },
+                { "something_extra12": "extra_stuff12" }
+            ]
+        }
+    }
+
 
     /*
      * Analytics example
