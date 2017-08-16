@@ -22,12 +22,12 @@ Example Qt app for the QtFirebase project
     git clone git@github.com:Larpon/QtFirebase.git
     ```
 
-2. Download and unzip the latest 2.x Firebase C++ SDK from Google.
+2. Download and unzip the latest 4.x Firebase C++ SDK from Google.
 
   ```
   cd /path/to/download
-  wget https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_2.1.2.zip
-  unzip firebase_cpp_sdk_2.1.2.zip -d /path/to/sdk
+  wget https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_4.0.1.zip
+  unzip firebase_cpp_sdk_4.0.1.zip -d /path/to/sdk
   ```
 
 3. Add symlink OR set `QTFIREBASE_SDK_PATH` variable
@@ -89,7 +89,23 @@ Example Qt app for the QtFirebase project
    cd /path/to/projects/QtFirebaseExample/extensions/QtFirebase/src/ios/CocoaPods
    pod install
    ```
-  
+  * Run `make_ios_joined_statics.sh` from the QtFirebase project root:
+   ```
+   cd /path/to/QtFirebase/
+   ./make_ios_joined_statics.sh
+   ```
+  * Verify that a set of `lib<name>.a` exists in `/path/to/sdk/firebase_cpp_sdk/libs/ios`
+   ```
+   cd /path/to/sdk/firebase_cpp_sdk/libs/ios/
+   ls | grep lib
+   
+   libadmob.a
+   libanalytics.a
+   libapp.a
+   libremote_config.a
+   ```
+   This step is important as the `make_ios_joined_statics.sh` uses `libtool` to join each of the static libs used from each supported architecture into one combined static lib to link against. We have yet to find out why this is necessary for the project to run properly.
+   
 5. Push the *Run* button
 
   If you build for Android or iOS you should see output like the following in the "General Messages" tab of QtCreator
