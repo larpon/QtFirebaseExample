@@ -22,6 +22,4 @@ Example Qt app for the QtFirebase project
     git clone git@github.com:Larpon/QtFirebase.git
     ```
 
-2. Follow the instructions on how to setup QtFirebase
-
-  Follow the instructions in [SETUP.md](https://github.com/Larpon/QtFirebase/blob/master/SETUP.md)
+2. Follow the instructions in [SETUP.md](https://github.com/Larpon/QtFirebase/blob/master/SETUP.md) on how to setup QtFirebase
