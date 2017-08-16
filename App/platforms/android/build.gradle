@@ -131,16 +131,13 @@ project.ext {
 
     // Check the NDK location using the same configuration options as the
     // experimental Gradle plug-in.
-    ndk_dir = project.android.ndkDirectory
+    def ndkDir = android.ndkDirectory
 
-    if (ndk_dir == null || !ndk_dir.exists()) {
-        ndk_dir = System.getenv('ANDROID_NDK_HOME')
-        if (ndk_dir == null || ndk_dir.isEmpty()) {
-            ndk_dir = System.getenv('ANDROID_NDK_ROOT')
-        }
-        if (ndk_dir == null || ndk_dir.isEmpty()) {
+    if (ndkDir == null || !ndkDir.exists()) {
+        ndkDir = System.getenv('ANDROID_NDK_HOME')
+        if (ndkDir == null || ndkDir.isEmpty()) {
             throw new StopActionException(
-                'Android NDK directory should be specified using the ndk.dir ' +
+                'Android NDK directory should be specified using the ndkDir ' +
                 'property or ANDROID_NDK_HOME environment variable.'
             )
         }
