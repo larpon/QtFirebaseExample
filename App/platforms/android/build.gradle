@@ -106,9 +106,11 @@ android {
 project.ext {
     // Configure the Firebase C++ SDK location.
     firebase_cpp_sdk_dir = System.getProperty('firebase_cpp_sdk.dir')
+    firebaseSdkUsed = 'system property firebase_cpp_sdk.dir'
 
     if (firebase_cpp_sdk_dir == null || firebase_cpp_sdk_dir.isEmpty()) {
         firebase_cpp_sdk_dir = System.getenv('FIREBASE_CPP_SDK_DIR')
+        firebaseSdkUsed = 'system env variable FIREBASE_CPP_SDK_DIR'
         if (firebase_cpp_sdk_dir == null || firebase_cpp_sdk_dir.isEmpty()) {
             if ((new File('firebase_cpp_sdk')).exists()) {
                 firebase_cpp_sdk_dir = 'firebase_cpp_sdk'
@@ -128,20 +130,29 @@ project.ext {
             sprintf('Firebase C++ SDK directory %s does not exist', firebase_cpp_sdk_dir)
         )
     }
+    println 'QtFirebase using Firebase C++ SDK located in ' + firebase_cpp_sdk_dir + ' (from ' + firebaseSdkUsed + ')'
 
     // Check the NDK location using the same configuration options as the
     // experimental Gradle plug-in.
     def ndkDir = android.ndkDirectory
+    ndkUsed = 'android.ndkDirectory'
 
     if (ndkDir == null || !ndkDir.exists()) {
-        ndkDir = System.getenv('ANDROID_NDK_HOME')
-        if (ndkDir == null || ndkDir.isEmpty()) {
-            throw new StopActionException(
-                'Android NDK directory should be specified using the ndkDir ' +
-                'property or ANDROID_NDK_HOME environment variable.'
-            )
-        }
+        ndkDir = new File(System.getProperty('ndk_dir'))
+        ndkUsed = 'system property ndk_dir'
     }
+    if (ndkDir == null || !ndkDir.exists()) {
+        ndkDir = new File(System.getenv('ANDROID_NDK_HOME'))
+        ndkUsed = 'system env variable ANDROID_NDK_HOME'
+    }
+    if (ndkDir == null || !ndkDir.exists()) {
+        throw new StopActionException(
+            'Android NDK directory should be specified using the ndkDir ' +
+            'property or ANDROID_NDK_HOME environment variable.'
+        )
+    }
+    println 'QtFirebase (Firebase C++ SDK) using Android NDK located in ' + ndkDir + ' (from ' + ndkUsed + ')'
+
 }
 
 repositories {
