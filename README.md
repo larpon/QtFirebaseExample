@@ -23,4 +23,5 @@ Example Qt app for the QtFirebase project
     ```
 
 2. Follow the instructions on how to setup QtFirebase
+
   Follow the instructions in [SETUP.md](https://github.com/Larpon/QtFirebase/blob/master/SETUP.md)
