@@ -116,9 +116,46 @@ ApplicationWindow {
         }
     }
 
+    AdMobRewardedVideoAd {
+        id: rewardedVideoAd
+
+        adUnitId: Qt.platform.os == "android" ? "ca-app-pub-6606648560678905/5628948780" : "ca-app-pub-6606648560678905/2850564595"
+
+        onReadyChanged: if(ready) load()
+        //onLoadedChanged: if(loaded) show()
+
+        onClosed: load()
+
+        request: AdMobRequest {
+            gender: AdMob.GenderUnknown
+            childDirectedTreatment: AdMob.ChildDirectedTreatmentUnknown
+
+            // NOTE remember JS Date months are 0 based
+            // 8th of December 1979:
+            birthday: new Date(1979,11,8)
+
+            keywords: [
+                "Qt",
+                "Firebase"
+            ]
+
+            extras: [
+                { "something_extra1": "extra_stuff1" },
+                { "something_extra2": "extra_stuff2" }
+            ]
+        }
+
+        onError: {
+            console.log("RewardedVideoAd failed with error code",code,"and message",message)
+            // See AdMob.Error* enums
+            if(code === AdMob.ErrorNetworkError)
+                console.log("No network available");
+        }
+    }
+
     AdMobNativeExpressAd {
         id: nativeExpressAd
-        //adUnitId: Qt.platform.os == "android" ? "ca-app-pub-3940256099942544/6300978111" : "ca-app-pub-6606648560678905/3170652476"
+        adUnitId: Qt.platform.os == "android" ? "ca-app-pub-6606648560678905/3373308775" : "ca-app-pub-6606648560678905/3620720781"
 
         x: 0
         y: ready ? application.height-height : 0
