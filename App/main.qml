@@ -339,6 +339,13 @@ ApplicationWindow {
 
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
+            enabled: rewardedVideoAd.loaded
+            text: enabled ? "Show Rewarded Video Ad" : "Rewarded Video Ad loading..."
+            onClicked: rewardedVideoAd.show()
+        }
+
+        Button {
+            anchors.horizontalCenter: parent.horizontalCenter
             text: banner.visible ? "Hide banner" : "Show banner"
             onClicked: banner.visible = !banner.visible
         }

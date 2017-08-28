@@ -39,6 +39,7 @@ android: {
 }
 
 ios: {
+    CONFIG -= bitcode
 
     ios_icon.files = $$files($$PLATFORMS_DIR/ios/icons/AppIcon*.png)
     QMAKE_BUNDLE_DATA += ios_icon
