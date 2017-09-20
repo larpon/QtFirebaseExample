@@ -1,5 +1,12 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>qml/Database.qml</file>
+        <file>qml/Page.qml</file>
+        <file>qml/Auth.qml</file>
+        <file>qml/AdMob.qml</file>
+        <file>qml/Analytics.qml</file>
+        <file>qml/RemoteConfig.qml</file>
+        <file>qml/Messaging.qml</file>
     </qresource>
 </RCC>

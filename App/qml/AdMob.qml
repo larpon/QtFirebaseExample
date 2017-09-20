@@ -1,0 +1,251 @@
+import QtQuick 2.0
+import QtQuick.Controls 1.4
+
+import QtFirebase 1.0
+
+import "."
+
+/*
+ * AdMob example
+ */
+Page {
+    id: root
+
+    Column {
+        anchors.centerIn: parent
+
+        Row {
+
+            Button {
+                enabled: interstitial.loaded
+                text: enabled ? "Show interstitial" : "Interstitial loading..."
+                onClicked: interstitial.show()
+            }
+            Button {
+                visible: !interstitial.loaded
+                text: "Reload"
+                onClicked: interstitial.load()
+            }
+        }
+
+        Row {
+            Button {
+                enabled: rewardedVideoAd.loaded
+                text: enabled ? "Show Rewarded Video Ad" : "Rewarded Video Ad loading..."
+                onClicked: rewardedVideoAd.show()
+            }
+            Button {
+                visible: !rewardedVideoAd.loaded
+                text: "Reload"
+                onClicked: rewardedVideoAd.load()
+            }
+        }
+
+        Row {
+            Button {
+                enabled: banner.loaded
+                text: banner.loaded ? banner.visible ? "Hide banner" : "Show banner" : "Banner loading..."
+                onClicked: banner.visible = !banner.visible
+            }
+            Button {
+                visible: !banner.loaded
+                text: "Reload"
+                onClicked: banner.load()
+            }
+        }
+
+
+        Button {
+            enabled: banner.loaded
+            text: "Move banner to random position"
+            onClicked: {
+                // NOTE that the banner won't leave screen on Android (or crash depending on Firebase SDK version) - even if you set off-screen coordinates.
+                // On iOS you can set the banner off-screen
+                // This is not a "feature" of QtFirebase
+                var rx = getRandomInt(0, root.width-banner.width)
+                var ry = getRandomInt(0, root.height-banner.height)
+
+                banner.x = rx
+                banner.y = ry
+            }
+        }
+
+    }
+
+    // NOTE a size of 320x50 will give a Standard banner - other sizes will give a SmartBanner
+    // NOTE width and height are values relative to the native screen size - NOT any parent QML components
+    AdMobBanner {
+        id: banner
+        adUnitId: Qt.platform.os == "android" ? "ca-app-pub-6606648560678905/2662933118" : "ca-app-pub-6606648560678905/6382686274"
+
+        visible: loaded
+
+        width: 320
+        height: 50
+
+        onReadyChanged: if(ready) load()
+
+        onLoadedChanged: {
+            if(loaded)
+                moveTo(AdMobBanner.PositionBottomCenter)
+        }
+
+        onError: {
+            console.log("Banner failed with error code",code,"and message",message)
+
+            // See AdMob.Error* enums
+            if(code === AdMob.ErrorNetworkError)
+                console.log("No network available");
+        }
+
+        request: AdMobRequest {
+            gender: AdMob.GenderMale
+            childDirectedTreatment: AdMob.ChildDirectedTreatmentUnknown
+
+            // NOTE remember JS Date months are 0 based
+            // 1st of Januray 1980:
+            birthday: new Date(1980,0,1)
+
+            keywords: [
+                "AdMob",
+                "QML",
+                "Qt",
+                "Fun",
+                "Test",
+                "Firebase"
+            ]
+
+            extras: [
+                { "something_extra11": "extra_stuff11" },
+                { "something_extra12": "extra_stuff12" }
+            ]
+        }
+    }
+
+    AdMobInterstitial {
+        id: interstitial
+        adUnitId: Qt.platform.os == "android" ? "ca-app-pub-6606648560678905/3118450073" : "ca-app-pub-6606648560678905/7548649672"
+        //adUnitId: "ca-app-pub-6606648560678905/3118450073"; // Android
+        //adUnitId: "ca-app-pub-6606648560678905/7548649672"; // iOS
+
+        onReadyChanged: if(ready) load()
+        //onLoadedChanged: if(loaded) show()
+
+        onClosed: load()
+
+        request: AdMobRequest {
+            gender: AdMob.GenderFemale
+            childDirectedTreatment: AdMob.ChildDirectedTreatmentTagged
+
+            // NOTE remember JS Date months are 0 based
+            // 8th of December 1979:
+            birthday: new Date(1979,11,8)
+
+            keywords: [
+                "Perfume",
+                "Scent"
+            ]
+
+            extras: [
+                { "something_extra1": "extra_stuff1" },
+                { "something_extra2": "extra_stuff2" }
+            ]
+        }
+
+        onError: {
+            console.log("Interstitial failed with error code",code,"and message",message)
+
+            // See AdMob.Error* enums
+            if(code === AdMob.ErrorNetworkError)
+                console.log("No network available");
+        }
+    }
+
+    AdMobRewardedVideoAd {
+        id: rewardedVideoAd
+
+        adUnitId: Qt.platform.os == "android" ? "ca-app-pub-6606648560678905/5628948780" : "ca-app-pub-6606648560678905/2850564595"
+
+        onReadyChanged: if(ready) load()
+        //onLoadedChanged: if(loaded) show()
+
+        onClosed: load()
+
+        request: AdMobRequest {
+            gender: AdMob.GenderUnknown
+            childDirectedTreatment: AdMob.ChildDirectedTreatmentUnknown
+
+            // NOTE remember JS Date months are 0 based
+            // 8th of December 1979:
+            birthday: new Date(1979,11,8)
+
+            keywords: [
+                "Qt",
+                "Firebase"
+            ]
+
+            extras: [
+                { "something_extra1": "extra_stuff1" },
+                { "something_extra2": "extra_stuff2" }
+            ]
+        }
+
+        onError: {
+            console.log("RewardedVideoAd failed with error code",code,"and message",message)
+
+            // See AdMob.Error* enums
+            if(code === AdMob.ErrorNetworkError)
+                console.log("No network available");
+        }
+    }
+
+    AdMobNativeExpressAd {
+        id: nativeExpressAd
+        adUnitId: Qt.platform.os == "android" ? "ca-app-pub-6606648560678905/3373308775" : "ca-app-pub-6606648560678905/3620720781"
+
+        visible: loaded
+
+        width: 320
+        height: 50
+
+        onReadyChanged: if(ready) load()
+
+        onLoadedChanged: {
+            if(loaded)
+                moveTo(AdMobBanner.PositionTopRight)
+        }
+
+        onError: {
+            console.log("NativeExpressAd failed with error code",code,"and message",message)
+
+            // See AdMob.Error* enums
+            if(code === AdMob.ErrorNetworkError)
+                console.log("No network available");
+        }
+
+        request: AdMobRequest {
+            gender: AdMob.GenderFemale
+            childDirectedTreatment: AdMob.ChildDirectedTreatmentUnknown
+
+            // NOTE remember JS Date months are 0 based
+            // 1st of Januray 1980:
+            birthday: new Date(1980,0,1)
+
+            keywords: [
+                "AdMobNativeExpressAd",
+                "QML",
+                "Qt",
+                "Fun",
+                "Test",
+                "Firebase"
+            ]
+
+            extras: [
+                { "something_extra11": "extra_stuff11" },
+                { "something_extra12": "extra_stuff12" }
+            ]
+        }
+    }
+
+
+}
