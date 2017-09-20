@@ -174,7 +174,7 @@ dependencies {
     compile 'com.google.firebase:firebase-ads:11.+'
 
     // For Google Analytics support
-    compile 'com.google.firebase:firebase-core:11.+'         // New recommended package
+    compile 'com.google.firebase:firebase-core:11.+'         // Recommended package
     // compile 'com.google.firebase:firebase-analytics:11.+' // deprecated
 
     // For RemoteConfig support
@@ -183,6 +183,12 @@ dependencies {
     // For Messaging support
     compile 'com.google.firebase:firebase-messaging:11.+'
     compile 'com.google.firebase.messaging.cpp:firebase_messaging_cpp@aar'
+
+    // For Auth support
+    compile 'com.google.firebase:firebase-auth:11.+'
+
+    // For Database support
+    compile 'com.google.firebase:firebase-database:11.+'
 
 }
 

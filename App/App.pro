@@ -68,7 +68,7 @@ ios: {
 
 # Make these modules of QtFirebase
 # NOTE QTFIREBASE_SDK_PATH can be symlinked to match $$PWD/firebase_cpp_sdk
-QTFIREBASE_CONFIG += analytics messaging admob remote_config
+QTFIREBASE_CONFIG += analytics messaging admob remote_config auth database
 
 # Disable fixes for know problems
 # DEFINES += QTFIREBASE_DISABLE_FIX_ANDROID_AUTO_APP_STATE_VISIBILTY
