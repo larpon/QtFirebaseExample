@@ -11,6 +11,10 @@ import "."
 Page {
     id: root
 
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     Column {
         anchors.centerIn: parent
 
