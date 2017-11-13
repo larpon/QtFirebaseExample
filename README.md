@@ -24,8 +24,3 @@ Example Qt app for the QtFirebase project
 
 2. Follow the instructions in [SETUP.md](https://github.com/Larpon/QtFirebase/blob/master/SETUP.md) on how to setup QtFirebase
 
-# TODO
-
-* Fix UI
-* Add NativeExpressAd example
-* Add Messaging example
