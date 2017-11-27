@@ -162,7 +162,7 @@ ApplicationWindow {
             text: "App "+App.versions.app+" ("+App.versions.git+"/"+App.versions.branch+")"
         }
         Label {
-            //text: "QtFirebase "+App.versions.firebase +" ("+App.versions.firebaseGit+"/"+App.versions.firebaseGitBranch+")"
+            text: "QtFirebase "+App.versions.firebase +" ("+App.versions.firebaseGit+"/"+App.versions.firebaseGitBranch+")"
         }
     }
 

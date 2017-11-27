@@ -22,7 +22,7 @@ QdObject {
         readonly property string branch: gitBranch
         readonly property string firebase: qtFirebaseVersion
         readonly property string firebaseGit: qtFirebaseGitVersion
-        //readonly property string firebaseGitBranch: qtFirebaseGitBranch
+        readonly property string firebaseGitBranch: qtFirebaseGitBranch
 
     }
 
