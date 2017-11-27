@@ -19,7 +19,7 @@ Example Qt app for the QtFirebase project
     Clone into the "extensions" folder or into other folder of your choice
     ```
     cd /path/to/projects/QtFirebaseExample/extensions
-    git clone git@github.com:Larpon/QtFirebase.git
+    git clone https://github.com/Larpon/QtFirebase.git
     ```
 
 2. Follow the instructions in [SETUP.md](https://github.com/Larpon/QtFirebase/blob/master/SETUP.md) on how to setup QtFirebase
