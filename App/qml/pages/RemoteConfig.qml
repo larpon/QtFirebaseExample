@@ -3,13 +3,23 @@ import QtQuick.Controls 1.4
 
 import QtFirebase 1.0
 
-import "."
+import ".."
 
 /*
  * RemoteConfig example
  */
 Page {
     id: root
+
+    Column {
+        anchors.centerIn: parent
+
+        Text{
+            id: titleText
+            anchors.horizontalCenter: parent.horizontalCenter
+            text:"<h2>Remote Config</h2>See console output for some action"
+        }
+    }
 
     // Timer to poll for changes in RemoteConfig
     Timer {
@@ -35,8 +45,9 @@ Page {
 
         // 3. When remote config properly initialized request data from server
         onReadyChanged: {
-            console.log("RemoteConfig ready changed:"+ready);
+            App.log("RemoteConfig.ready", ready);
             if(ready) {
+                App.log("RemoteConfig::fecth()");
                 remoteConfig.fetch();
                 // If the data in the cache was fetched no longer than cacheExpirationTime ago,
                 // this method will return the cached data. If not, a fetch from the
@@ -52,15 +63,16 @@ Page {
         // 4. If data was retrieved (both from server or cache) the handler will be called
         // you can access data by accessing the "parameters" member variable
         onParametersChanged: {
-            console.log("RemoteConfig test long", parameters["remote_config_test_long"]);
-            console.log("RemoteConfig test bool", parameters["remote_config_test_boolean"]);
-            console.log("RemoteConfig test double", parameters["remote_config_test_double"]);
-            console.log("RemoteConfig test string", parameters["remote_config_test_string"]);
+            App.log("RemoteConfig.parameters")
+            App.log("test long", parameters["remote_config_test_long"]);
+            App.log("test bool", parameters["remote_config_test_boolean"]);
+            App.log("test double", parameters["remote_config_test_double"]);
+            App.log("test string", parameters["remote_config_test_string"]);
         }
 
         //5. Handle errors
         onError: {
-            console.log("RemoteConfig error code:" + code + " message:" + message);
+            App.error("RemoteConfig error code:" + code + " message:" + message);
         }
     }
 

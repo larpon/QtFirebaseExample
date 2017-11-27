@@ -3,17 +3,19 @@ import QtQuick.Controls 1.4
 
 import QtFirebase 1.0
 
+import "qml"
+
 ApplicationWindow {
     id: app
 
-    title: qsTr('QtFirebase Example (%1x%2)').arg(width).arg(height)
+    title: qsTr('%1 (%2x%3)').arg(App.name).arg(width).arg(height)
 
     visible: true
 
     width: 500
     height: 832
 
-    property bool paused: !Qt.application.active
+    property bool paused: !App.active
 
     color: "#def2da"
 
@@ -24,60 +26,163 @@ ApplicationWindow {
     }
 
     Column {
-        anchors.centerIn: parent
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+        }
 
         visible: !loader.ready
 
-        Label {
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: "Examples"
+        Item {
+            width: height
+            height: parent.height*0.2
+        }
+
+        Image {
+            id: logoImage
+            source: "assets/logo.png"
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+            }
+
+            transformOrigin: Item.Center
+            SequentialAnimation {
+                running: true
+                loops: Animation.Infinite
+
+                ParallelAnimation {
+                    NumberAnimation {
+                        target: logoImage
+                        property: "scale"
+                        duration: 900
+                        to: 1.05
+                    }
+                    NumberAnimation {
+                        target: logoImage
+                        property: "rotation"
+                        duration: 700
+                        to: 3
+                    }
+                }
+
+                ParallelAnimation {
+                    NumberAnimation {
+                        target: logoImage
+                        property: "scale"
+                        duration: 900
+                        to: 0.95
+                    }
+
+                    NumberAnimation {
+                        target: logoImage
+                        property: "rotation"
+                        duration: 700
+                        to: -3
+                    }
+                }
+            }
+        }
+
+        Item {
+            width: height
+            height: parent.height*0.05
         }
 
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
             text: "AdMob"
-            onClicked: loader.source = "qml/AdMob.qml"
+            onClicked: loader.source = "qml/pages/AdMob.qml"
         }
 
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
             text: "Analytics"
-            onClicked: loader.source = "qml/Analytics.qml"
+            onClicked: loader.source = "qml/pages/Analytics.qml"
         }
 
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
             text: "Auth"
-            onClicked: loader.source = "qml/Auth.qml"
+            onClicked: loader.source = "qml/pages/Auth.qml"
         }
 
 
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
             text: "Database"
-            onClicked: loader.source = "qml/Database.qml"
+            onClicked: loader.source = "qml/pages/Database.qml"
         }
 
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
             text: "Messaging"
-            onClicked: loader.source = "qml/Messaging.qml"
+            onClicked: loader.source = "qml/pages/Messaging.qml"
         }
 
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
             text: "Remote Config"
-
-            property int clicks: 0
-            onClicked: {
-                clicks++
-                loader.source = "qml/RemoteConfig.qml"
-                if(clicks >= 2)
-                    console.log('Crashing :( - To prevent this place RemoteConfig a place in your code where it\'s not re-initialized')
-            }
-
+            onClicked: loader.source = "qml/pages/RemoteConfig.qml"
         }
 
+    }
+
+
+    Row {
+        id: bottomRow
+        anchors {
+            bottom: consoleHistory.top
+            left: parent.left
+            right: parent.right
+        }
+
+        /*
+        Button {
+            text: "About"
+            onClicked: { about.visible = !about.visible  }
+        }*/
+
+        Button {
+            text: "Console"
+            onClicked: { consoleHistory.visible = !consoleHistory.visible }
+        }
+
+    }
+
+    Column {
+        id: about
+        anchors {
+            bottom: bottomRow.top
+        }
+
+        Label {
+            text: "Qt "+App.versions.qt
+        }
+        Label {
+            text: "App "+App.versions.app+" ("+App.versions.git+"/"+App.versions.branch+")"
+        }
+        Label {
+            //text: "QtFirebase "+App.versions.firebase +" ("+App.versions.firebaseGit+"/"+App.versions.firebaseGitBranch+")"
+        }
+    }
+
+    TextArea {
+        id: consoleHistory
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
+        text: App.consoleHistory
+
+        width: parent.width
+        height: visible ? app.height*0.25 : 0
+        Behavior on height {
+            NumberAnimation { duration: 250 }
+        }
+
+        wrapMode: TextEdit.NoWrap
+        visible: false
     }
 
     Loader {
@@ -92,6 +197,11 @@ ApplicationWindow {
                     app.back()
                 })
             }
+        }
+
+        onSourceChanged: {
+            if(source.toString() !== "")
+            App.debug("Load page",source)
         }
     }
 
@@ -133,11 +243,11 @@ ApplicationWindow {
 
         onError: {
             // TODO fix "undefined" arguments
-            console.log("Banner failed with error code",code,"and message",message)
+            App.log("Banner failed with error code",code,"and message",message)
 
             // See AdMob.Error* enums
             if(code === AdMob.ErrorNetworkError)
-                console.log("No network available");
+                App.log("No network available");
         }
 
         request: AdMobRequest {

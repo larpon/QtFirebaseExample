@@ -3,7 +3,7 @@ import QtQuick.Controls 1.4
 
 import QtFirebase 1.0
 
-import "."
+import ".."
 
 /*
  * Analytics example
@@ -24,6 +24,8 @@ Page {
 
         text: "Test event logging"
         onClicked: {
+            App.log("Calling Analytics::logEvent()")
+
             analytics.logEvent("qtfb_event")
             analytics.logEvent("qtfb_event","string_test","string")
             analytics.logEvent("qtfb_event","int_test",getRandomInt(-100, 100))
@@ -34,6 +36,8 @@ Page {
                 'key_two': 14,
                 'key_three': 2.3
             })
+
+
         }
     }
 

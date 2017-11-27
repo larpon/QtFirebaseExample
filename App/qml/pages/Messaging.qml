@@ -3,7 +3,7 @@ import QtQuick.Controls 1.4
 
 import QtFirebase 1.0
 
-import "."
+import ".."
 
 Page {
     id: root
@@ -28,13 +28,13 @@ Page {
         id: messaging
 
         onReadyChanged: {
-            console.log("Messaging onReadyChanged", ready)
+            App.log("Messaging.ready", ready)
         }
         onTokenChanged: {
-            console.log("Messaging onTokenChanged", token)
+            App.log("Messaging.token", token)
         }
         onDataChanged: {
-            console.log("Messaging onDataChanged", JSON.stringify(data))
+            App.log("Messaging.data", JSON.stringify(data))
         }
     }
 }

@@ -12,6 +12,18 @@ CONFIG += c++11
 # Default rules for deployment.
 include(deployment.pri)
 
+
+# Make version info available to C++ and QML
+VERSION = 1.2.1
+
+GIT_VERSION_ROOT = $$PWD/..
+include(../extensions/gitversion.pri)
+
+message("QtFirebaseExample $$VERSION git $$GIT_VERSION/$$GIT_BRANCH")
+
+PLATFORMS_DIR = $$PWD/platforms
+
+
 SOURCES += \
     main.cpp
 
@@ -78,3 +90,6 @@ include(../extensions/QtFirebase/qtfirebase.pri)
 
 RESOURCES += \
     qml.qrc
+
+DISTFILES += \
+    assets/logo.png

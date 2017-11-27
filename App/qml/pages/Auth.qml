@@ -3,7 +3,7 @@ import QtQuick.Controls 1.4
 
 import QtFirebase 1.0
 
-import "."
+import ".."
 
 Page {
     id: root

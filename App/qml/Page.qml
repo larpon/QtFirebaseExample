@@ -17,7 +17,7 @@ Item {
             margins: 20
         }
 
-        text: "<- go back"
+        text: "<- Back"
         onClicked: exit()
     }
 }

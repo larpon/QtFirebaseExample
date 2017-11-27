@@ -3,7 +3,7 @@ import QtQuick.Controls 1.4
 
 import QtFirebase 1.0
 
-import "."
+import ".."
 
 Page {
     id: root
@@ -17,7 +17,7 @@ Page {
         Connections {
             target: Database
             onReadyChanged: {
-                console.log("Is dbready:" + Database.ready);
+                App.debug("Database.ready", Database.ready);
             }
         }
 
@@ -54,9 +54,9 @@ Page {
                     property string requestName: "Set"
                     onCompleted: {
                         if(success) {
-                            console.log(requestName+" request completed successfully");
+                            App.log(requestName+" request completed successfully");
                         } else {
-                            console.log(requestName+ " request failed with error:"+errorId()+" "+errorMsg());
+                            App.error(requestName+ " request failed with error:"+errorId()+" "+errorMsg());
                         }
 
                     }
@@ -73,9 +73,9 @@ Page {
                     property string requestName: "Update"
                     onCompleted: {
                         if(success) {
-                            console.log(requestName+" request completed successfully");
+                            App.log(requestName+" request completed successfully");
                         } else {
-                            console.log(requestName+ " request failed with error:"+errorId()+" "+errorMsg());
+                            App.error(requestName+ " request failed with error:"+errorId()+" "+errorMsg());
                         }
 
                     }
@@ -94,16 +94,16 @@ Page {
                     property var data;
                     onCompleted: {
                         if(success) {
-                            console.log("Get request successfully");
+                            App.log("Get request successfully");
                             if(snapshot.hasChildren()) {
-                                console.log(snapshot.key()+" "+snapshot.jsonString())
+                                App.log(snapshot.key()+" "+snapshot.jsonString())
                                 data = JSON.parse(snapshot.jsonString());
-                                console.log("Age:"+data.Age);
+                                App.log("Age:"+data.Age);
                             } else {
-                                console.log(snapshot.key() +" "+snapshot.value());
+                                App.log(snapshot.key() +" "+snapshot.value());
                             }
                         } else {
-                            console.log("Get request failed with error:"+errorId()+" "+errorMsg());
+                            App.error("Get request failed with error:"+errorId()+" "+errorMsg());
                         }
                     }
                 }
@@ -119,10 +119,10 @@ Page {
                     property string requestName: "Push"
                     onCompleted: {
                         if(success) {
-                            console.log(requestName+" request completed successfully");
-                            console.log("Pushed child got key:"+childKey())
+                            App.log(requestName+" request completed successfully");
+                            App.log("Pushed child got key:"+childKey())
                         } else {
-                            console.log(requestName + " request failed with error:"+errorId()+" "+errorMsg());
+                            App.error(requestName + " request failed with error:"+errorId()+" "+errorMsg());
                         }
                     }
                 }
@@ -140,14 +140,14 @@ Page {
                     property string requestName: "Query"
                     onCompleted: {
                         if(success) {
-                            console.log(requestName+" request completed successfully");
+                            App.log(requestName+" request completed successfully");
                             if(snapshot.hasChildren()) {
-                                console.log(snapshot.key()+" "+snapshot.jsonString())
+                                App.log(snapshot.key()+" "+snapshot.jsonString())
                             } else {
-                                console.log(snapshot.key() +" "+snapshot.value());
+                                App.log(snapshot.key() +" "+snapshot.value());
                             }
                         } else {
-                            console.log(requestName + " request failed with error:"+errorId()+" "+errorMsg());
+                            App.error(requestName + " request failed with error:"+errorId()+" "+errorMsg());
                         }
                     }
                 }

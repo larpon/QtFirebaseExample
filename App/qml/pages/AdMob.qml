@@ -3,7 +3,7 @@ import QtQuick.Controls 1.4
 
 import QtFirebase 1.0
 
-import "."
+import ".."
 
 /*
  * AdMob example
@@ -95,11 +95,11 @@ Page {
         }
 
         onError: {
-            console.log("Banner failed with error code",code,"and message",message)
+            App.log("Banner failed with error code",code,"and message",message)
 
             // See AdMob.Error* enums
             if(code === AdMob.ErrorNetworkError)
-                console.log("No network available");
+                App.log("No network available");
         }
 
         request: AdMobRequest {
@@ -157,11 +157,11 @@ Page {
         }
 
         onError: {
-            console.log("Interstitial failed with error code",code,"and message",message)
+            App.log("Interstitial failed with error code",code,"and message",message)
 
             // See AdMob.Error* enums
             if(code === AdMob.ErrorNetworkError)
-                console.log("No network available");
+                App.log("No network available");
         }
     }
 
@@ -195,11 +195,11 @@ Page {
         }
 
         onError: {
-            console.log("RewardedVideoAd failed with error code",code,"and message",message)
+            App.log("RewardedVideoAd failed with error code",code,"and message",message)
 
             // See AdMob.Error* enums
             if(code === AdMob.ErrorNetworkError)
-                console.log("No network available");
+                App.log("No network available");
         }
     }
 
@@ -220,11 +220,11 @@ Page {
         }
 
         onError: {
-            console.log("NativeExpressAd failed with error code",code,"and message",message)
+            App.log("NativeExpressAd failed with error code",code,"and message",message)
 
             // See AdMob.Error* enums
             if(code === AdMob.ErrorNetworkError)
-                console.log("No network available");
+                App.log("No network available");
         }
 
         request: AdMobRequest {

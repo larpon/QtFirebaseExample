@@ -1,12 +1,16 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>qml/Database.qml</file>
         <file>qml/Page.qml</file>
-        <file>qml/Auth.qml</file>
-        <file>qml/AdMob.qml</file>
-        <file>qml/Analytics.qml</file>
-        <file>qml/RemoteConfig.qml</file>
-        <file>qml/Messaging.qml</file>
+        <file>qml/qmldir</file>
+        <file>qml/App.qml</file>
+        <file>qml/QdObject.qml</file>
+        <file>qml/pages/AdMob.qml</file>
+        <file>qml/pages/Messaging.qml</file>
+        <file>qml/pages/RemoteConfig.qml</file>
+        <file>qml/pages/Database.qml</file>
+        <file>qml/pages/Analytics.qml</file>
+        <file>qml/pages/Auth.qml</file>
+        <file>assets/logo.png</file>
     </qresource>
 </RCC>
