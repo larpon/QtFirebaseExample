@@ -36,5 +36,9 @@ Page {
         onDataChanged: {
             App.log("Messaging.data", JSON.stringify(data))
         }
+        onMessageReceived: {
+            App.log("onMessageReceived","Messaging.data", JSON.stringify(data))
+        }
+
     }
 }
