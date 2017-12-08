@@ -157,11 +157,36 @@ Page {
         }
 
         onError: {
-            App.log("Interstitial failed with error code",code,"and message",message)
+            App.log("AdMobInterstitial","::onError","Interstitial failed with error code",code,"and message",message)
 
             // See AdMob.Error* enums
+            if(code === AdMob.ErrorNone)
+                App.log("AdMobInterstitial","::onError","No error - this shouldn't display :)")
+            if(code === AdMob.ErrorAlreadyInitialized)
+                App.log("AdMobInterstitial","::onError","Already initialized")
+            if(code === AdMob.ErrorInternalError)
+                App.log("AdMobInterstitial","::onError","Internal error")
+            if(code === AdMob.ErrorInvalidRequest)
+                App.log("AdMobInterstitial","::onError","Invalid request")
+            if(code === AdMob.ErrorLoadInProgress)
+                App.log("AdMobInterstitial","::onError","Load in progress")
             if(code === AdMob.ErrorNetworkError)
-                App.log("No network available");
+                App.log("AdMobInterstitial","::onError","No network available")
+            if(code === AdMob.ErrorNoFill)
+                App.log("AdMobInterstitial","::onError","No fill")
+            if(code === AdMob.ErrorNoWindowToken)
+                App.log("AdMobInterstitial","::onError","No window token")
+            if(code === AdMob.ErrorUninitialized)
+                App.log("AdMobInterstitial","::onError","Uninitialized")
+            if(code === AdMob.ErrorUnknown)
+                App.log("AdMobInterstitial","::onError","Unknown error")
+        }
+
+        onPresentationStateChanged: {
+            if(state === AdMobInterstitial.PresentationStateHidden)
+                App.log("AdMobInterstitial","::onPresentationStateChanged","PresentationStateHidden")
+            if(state === AdMobInterstitial.PresentationStateCoveringUI)
+                App.log("AdMobInterstitial","::onPresentationStateChanged","PresentationStateCoveringUI");
         }
     }
 
