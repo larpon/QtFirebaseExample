@@ -226,6 +226,13 @@ Page {
             if(code === AdMob.ErrorNetworkError)
                 App.log("No network available");
         }
+
+        onPresentationStateChanged: {
+            if(state === AdMobRewardedVideoAd.PresentationStateHidden)
+                App.log("AdMobRewardedVideoAd","::onPresentationStateChanged","PresentationStateHidden")
+            if(state === AdMobRewardedVideoAd.PresentationStateCoveringUI)
+                App.log("AdMobRewardedVideoAd","::onPresentationStateChanged","PresentationStateCoveringUI");
+        }
     }
 
     AdMobNativeExpressAd {
