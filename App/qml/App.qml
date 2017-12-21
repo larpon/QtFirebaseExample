@@ -26,6 +26,31 @@ QdObject {
 
     }
 
+    QdObject {
+        id: internal
+
+        // NOTE HACK 'setTimeout' function based on Timer
+        Component { id: timerComponent; Timer {} }
+        function setTimeout(callback, timeout)
+        {
+            var timer = timerComponent.createObject(internal)
+            timer.interval = timeout || 0
+            timer.triggered.connect(function()
+            {
+                timer.stop()
+                timer.destroy()
+                timer = null
+                callback()
+            })
+            timer.start()
+            return timer
+        }
+    }
+
+    function setTimeout(callback, timeout)
+    {
+        return internal.setTimeout(callback, timeout)
+    }
 
     function toConsoleHistory() {
         var args = Array.prototype.slice.call(arguments), i
