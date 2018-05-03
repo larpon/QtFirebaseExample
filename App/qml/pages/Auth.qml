@@ -50,7 +50,7 @@ Page {
 
             onCompleted: {
                 if(success) {
-                    if(actionId == Auth.AuthActionSignIn) {
+                    if(actionId == Auth.ActionSignIn) {
                         statusText.text = "Authentification success";
                         statusText.text += "\n";
                         statusText.text += "Name: " + displayName();
@@ -58,15 +58,15 @@ Page {
                         statusText.text += "Email: " + email();
                         statusText.text += "\n";
                         statusText.text += "Uid: " + uid();
-                    } else if(actionId == Auth.AuthActionRegister) {
+                    } else if(actionId == Auth.ActionRegister) {
                         statusText.text = "Registered success";
-                    } else if(actionId == Auth.AuthActionSignOut) {
+                    } else if(actionId == Auth.ActionSignOut) {
                         statusText.text = "Signed out";
                     }
                 } else {
-                    if(actionId == Auth.AuthActionSignIn) {
+                    if(actionId == Auth.ActionSignIn) {
                         statusText.text = "Authentification failed";
-                    } else if(actionId == Auth.AuthActionRegister) {
+                    } else if(actionId == Auth.ActionRegister) {
                         statusText.text = "Registration failed";
                     }
                     statusText.text += "\n";
