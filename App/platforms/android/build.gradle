@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        google()
         // You can search here for sdk's
         // http://search.maven.org/
         mavenLocal()
@@ -15,8 +16,8 @@ buildscript {
 
     dependencies {
         // You can update gradle by changing build-folder/android-build/gradle/wrapper/gradle-wrapper.properties
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'com.google.gms:google-services:3.+'
+        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath 'com.google.gms:google-services:3.0.0'
     }
 }
 
@@ -168,27 +169,27 @@ dependencies {
     compile 'com.android.support:multidex:1.+'
 
     compile 'com.android.support:appcompat-v7:25.0.1'         // Optional??
-    compile 'com.google.android.gms:play-services-base:11.+'  // Mandatory - Firebase rely on Google Play services
+    compile 'com.google.android.gms:play-services-base:12.+'  // Mandatory - Firebase rely on Google Play services
 
     // For AdMob support
-    compile 'com.google.firebase:firebase-ads:11.+'
+    compile 'com.google.firebase:firebase-ads:12.+'
 
     // For Google Analytics support
-    compile 'com.google.firebase:firebase-core:11.+'         // Recommended package
-    // compile 'com.google.firebase:firebase-analytics:11.+' // deprecated
+    compile 'com.google.firebase:firebase-core:12.+'         // Recommended package
+    // compile 'com.google.firebase:firebase-analytics:12.+' // deprecated
 
     // For RemoteConfig support
-    compile 'com.google.firebase:firebase-config:11.+'
+    compile 'com.google.firebase:firebase-config:12.+'
 
     // For Messaging support
-    compile 'com.google.firebase:firebase-messaging:11.+'
     compile 'com.google.firebase.messaging.cpp:firebase_messaging_cpp@aar'
+    compile 'com.google.firebase:firebase-messaging:12.+'
 
     // For Auth support
-    compile 'com.google.firebase:firebase-auth:11.+'
+    compile 'com.google.firebase:firebase-auth:12.+'
 
     // For Database support
-    compile 'com.google.firebase:firebase-database:11.+'
+    compile 'com.google.firebase:firebase-database:12.+'
 
 }
 

@@ -62,7 +62,7 @@ Page {
                     id: messageDelay
                     text: "10"
                     maximumLength: 2
-                    width: 40
+                    width: root.width*0.15
                 }
 
                 Text {

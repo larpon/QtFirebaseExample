@@ -8,7 +8,7 @@ CONFIG += c++11
 # Additional import path used to resolve QML modules in Qt Creator's code model
 # QML_IMPORT_PATH =
 
-# IMPORTANT must be included before extensions
+# IMPORTANT must be included before extensions/vendor
 # Default rules for deployment.
 include(deployment.pri)
 
