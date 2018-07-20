@@ -17,7 +17,7 @@ buildscript {
     dependencies {
         // You can update gradle by changing build-folder/android-build/gradle/wrapper/gradle-wrapper.properties
         classpath 'com.android.tools.build:gradle:3.1.0'
-        classpath 'com.google.gms:google-services:3.0.0'
+        classpath 'com.google.gms:google-services:4.0.1'
     }
 }
 
@@ -166,31 +166,30 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile fileTree(dir: 'src', include: ['*.jar'])
 
-    compile 'com.android.support:multidex:1.+'
-
-    compile 'com.android.support:appcompat-v7:25.0.1'         // Optional??
-    compile 'com.google.android.gms:play-services-base:12.+'  // Mandatory - Firebase rely on Google Play services
+    compile 'com.android.support:appcompat-v7:27.1.1'         // Optional??
+    compile 'com.google.android.gms:play-services-base:15.0.1'  // Mandatory - Firebase rely on Google Play services
 
     // For AdMob support
-    compile 'com.google.firebase:firebase-ads:12.+'
+    compile 'com.google.firebase:firebase-ads:15.0.1'
 
     // For Google Analytics support
-    compile 'com.google.firebase:firebase-core:12.+'         // Recommended package
+    compile 'com.google.firebase:firebase-core:16.0.1'         // Recommended package
     // compile 'com.google.firebase:firebase-analytics:12.+' // deprecated
 
     // For RemoteConfig support
-    compile 'com.google.firebase:firebase-config:12.+'
+    compile 'com.google.firebase:firebase-config:16.0.0'
 
     // For Messaging support
     compile 'com.google.firebase.messaging.cpp:firebase_messaging_cpp@aar'
-    compile 'com.google.firebase:firebase-messaging:12.+'
+    compile 'com.google.firebase:firebase-messaging:17.1.0'
 
     // For Auth support
-    compile 'com.google.firebase:firebase-auth:12.+'
+    compile 'com.google.firebase:firebase-auth:16.0.2'
 
     // For Database support
-    compile 'com.google.firebase:firebase-database:12.+'
+    compile 'com.google.firebase:firebase-database:16.0.1'
 
+    compile 'com.google.firebase:firebase-common:16.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
