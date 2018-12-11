@@ -61,7 +61,8 @@ android {
 
     compileSdkVersion androidCompileSdkVersion.toInteger()
 
-    buildToolsVersion androidBuildToolsVersion
+    // Android Gradle Plugin now has default versions of buildTools
+    //buildToolsVersion androidBuildToolsVersion
 
     sourceSets {
         main {
@@ -163,33 +164,33 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile fileTree(dir: 'src', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'src', include: ['*.jar'])
 
-    compile 'com.android.support:appcompat-v7:27.1.1'         // Optional??
-    compile 'com.google.android.gms:play-services-base:15.0.1'  // Mandatory - Firebase rely on Google Play services
+    implementation 'com.android.support:appcompat-v7:27.1.1'         // Optional??
+    implementation 'com.google.android.gms:play-services-base:15.0.1'  // Mandatory - Firebase rely on Google Play services
 
     // For AdMob support
-    compile 'com.google.firebase:firebase-ads:15.0.1'
+    implementation 'com.google.firebase:firebase-ads:15.0.1'
 
     // For Google Analytics support
-    compile 'com.google.firebase:firebase-core:16.0.1'         // Recommended package
-    // compile 'com.google.firebase:firebase-analytics:12.+' // deprecated
+    implementation 'com.google.firebase:firebase-core:16.0.1'         // Recommended package
+    // implementation 'com.google.firebase:firebase-analytics:12.+' // deprecated
 
     // For RemoteConfig support
-    compile 'com.google.firebase:firebase-config:16.0.0'
+    implementation 'com.google.firebase:firebase-config:16.0.0'
 
     // For Messaging support
-    compile 'com.google.firebase.messaging.cpp:firebase_messaging_cpp@aar'
-    compile 'com.google.firebase:firebase-messaging:17.1.0'
+    implementation 'com.google.firebase.messaging.cpp:firebase_messaging_cpp@aar'
+    implementation 'com.google.firebase:firebase-messaging:17.1.0'
 
     // For Auth support
-    compile 'com.google.firebase:firebase-auth:16.0.2'
+    implementation 'com.google.firebase:firebase-auth:16.0.2'
 
     // For Database support
-    compile 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.google.firebase:firebase-database:16.0.1'
 
-    compile 'com.google.firebase:firebase-common:16.0.0'
+    implementation 'com.google.firebase:firebase-common:16.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
