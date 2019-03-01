@@ -37,6 +37,7 @@ android: {
     DISTFILES += \
         $$ANDROID_PACKAGE_SOURCE_DIR/AndroidManifest.xml \
         $$ANDROID_PACKAGE_SOURCE_DIR/build.gradle \
+        $$ANDROID_PACKAGE_SOURCE_DIR/settings.gradle \
         $$ANDROID_PACKAGE_SOURCE_DIR/gradle.properties \
         $$ANDROID_PACKAGE_SOURCE_DIR/local.properties \
         $$ANDROID_PACKAGE_SOURCE_DIR/google-services.json \
