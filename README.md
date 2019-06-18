@@ -1,4 +1,4 @@
-<img src="https://github.com/Larpon/QtFirebase/blob/master/logo.png" align="right"/>
+<img src="https://github.com/Larpon/QtFirebase/blob/master/docs/img/logo.png" align="right"/>
 
 # QtFirebaseExample
 Example Qt app for the QtFirebase project
@@ -22,5 +22,5 @@ Example Qt app for the QtFirebase project
     git clone git@github.com:Larpon/QtFirebase.git
     ```
 
-2. Follow the instructions in [SETUP.md](https://github.com/Larpon/QtFirebase/blob/master/SETUP.md) on how to setup QtFirebase
+2. Follow the instructions in [SETUP.md](https://github.com/Larpon/QtFirebase/blob/master/docs/SETUP.md) on how to setup QtFirebase
 
