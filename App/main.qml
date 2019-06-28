@@ -149,23 +149,6 @@ ApplicationWindow {
 
     }
 
-    Column {
-        id: about
-        anchors {
-            bottom: bottomRow.top
-        }
-
-        Label {
-            text: "Qt "+App.versions.qt
-        }
-        Label {
-            text: "App "+App.versions.app+" ("+App.versions.git+"/"+App.versions.branch+")"
-        }
-        Label {
-            text: "QtFirebase "+App.versions.firebase +" ("+App.versions.firebaseGit+"/"+App.versions.firebaseGitBranch+")"
-        }
-    }
-
     TextArea {
         id: consoleHistory
         anchors {
@@ -176,13 +159,40 @@ ApplicationWindow {
         text: App.consoleHistory
 
         width: parent.width
-        height: visible ? app.height*0.25 : 0
+        height: visible ? app.height*0.33 : 0
         Behavior on height {
             NumberAnimation { duration: 250 }
         }
 
         wrapMode: TextEdit.NoWrap
         visible: false
+
+        background: Rectangle {
+            anchors { fill: parent }
+            color: "light grey"
+
+            Column {
+                id: about
+                anchors {
+                    bottom: parent.bottom
+                }
+
+                spacing: 3
+
+                Label {
+                    text: "Qt "+App.versions.qt
+                    color: "dark grey"
+                }
+                Label {
+                    text: "App "+App.versions.app+" ("+App.versions.git+"/"+App.versions.branch+")"
+                    color: "dark grey"
+                }
+                Label {
+                    text: "QtFirebase "+App.versions.firebase +" ("+App.versions.firebaseGit+"/"+App.versions.firebaseGitBranch+")"
+                    color: "dark grey"
+                }
+            }
+        }
     }
 
     Loader {
