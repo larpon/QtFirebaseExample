@@ -14,7 +14,7 @@ include(deployment.pri)
 
 
 # Make version info available to C++ and QML
-VERSION = 1.2.4
+VERSION = 1.2.5
 
 GIT_VERSION_ROOT = $$PWD/..
 include(../extensions/gitversion.pri)

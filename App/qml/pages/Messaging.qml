@@ -17,7 +17,7 @@ Page {
             var params = "device="+messaging.token
             http.open("GET", url+"?"+params, true);
             http.onreadystatechange = function() {
-                if(http.readyState == 4 && http.status == 200) {
+                if(http.readyState === 4 && http.status === 200) {
                     App.log(http.responseText)
                 }
             }
@@ -41,6 +41,7 @@ Page {
         }
 
         Column {
+            spacing: 20
             Row {
                 Button {
                     text: "Send test message"
@@ -70,6 +71,39 @@ Page {
                 }
 
             }
+
+            Row {
+                spacing: 20
+
+                Label {
+                    text: "Subsriptions"
+                }
+
+                Button {
+                    text: "Subscribe"
+                    onClicked: {
+                        // Valid topics regex: [a-zA-Z0-9-_.~%]{1,900}
+                        messaging.subscribe('qtfirebase-topic')
+                        //messaging.subscribe('qtfirebase-topic-1')
+                        //messaging.subscribe('qtfirebase-topic-2')
+                        //messaging.subscribe('qtfirebase-topic-3')
+                        //messaging.subscribe('wrong-qtfirebase-topic')
+                    }
+                }
+
+                Button {
+                    text: "Unsubscribe"
+                    onClicked: {
+                        // Valid topics regex: [a-zA-Z0-9-_.~%]{1,900}
+                        messaging.unsubscribe('qtfirebase-topic')
+                        //messaging.unsubscribe('qtfirebase-topic-1')
+                        //messaging.unsubscribe('qtfirebase-topic-2')
+                        //messaging.unsubscribe('qtfirebase-topic-3')
+                        //messaging.unsubscribe('wrong-qtfirebase-topic')
+                    }
+                }
+            }
+
         }
     }
 
@@ -89,5 +123,15 @@ Page {
             App.log("onMessageReceived","Messaging.data", JSON.stringify(data))
         }
 
+        onSubscribed: {
+            App.log("Messaging::onSubscribed", topic)
+        }
+        onUnsubscribed: {
+            App.log("Messaging::onUnsubscribed", topic)
+        }
+
+        onError: {
+            App.error('Messaging::error',code, message);
+        }
     }
 }
