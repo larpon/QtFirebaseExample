@@ -34,15 +34,4 @@ First off: If you have the QtFirebaseExample running and showing at least one te
 
 But, they don't always do. 
 
-This is kind of where we leave you off as a developer. Why?. Because your entering Google's domain - and your project's specific setup. AdMod and Firebase are (mostly) closed platforms. Any problems with Ad fill-rates and backend messaging are out of this project's scope. The QtFirebase project only provide Qt wrapper classes - that's it. If you want to know more about how things really work please refer to the official documentation of the respective projects:
-
-Documentation:
-https://firebase.google.com/docs/cpp/setup
-https://developers.google.com/admob/
-
-Troubleshooting
-https://stackoverflow.com/questions/tagged/firebase%20c%2b%2b
-
-Community
-https://github.com/firebase/firebase-cpp-sdk
-https://groups.google.com/forum/#!forum/google-admob-ads-sdk
+Well, then please see [what to do next](https://github.com/Larpon/QtFirebase/blob/master/docs/SETUP.md#what-to-do-next).
