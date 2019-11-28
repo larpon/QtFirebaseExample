@@ -4,7 +4,7 @@ import org.qtproject.qt5.android.bindings.QtApplication;
 import org.qtproject.qt5.android.bindings.QtActivity;
 
 import android.util.Log;
-import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.app.AppCompatActivity;
 
 import android.view.WindowManager;
 

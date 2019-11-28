@@ -103,12 +103,17 @@ Page {
         }
 
         request: AdMobRequest {
-            gender: AdMob.GenderMale
-            childDirectedTreatment: AdMob.ChildDirectedTreatmentUnknown
+            gender: AdMobRequest.GenderFemale
+            //childDirectedTreatment: AdMobRequest.ChildDirectedTreatmentUnknown
 
             // NOTE remember JS Date months are 0 based
             // 1st of Januray 1980:
-            birthday: new Date(1980,0,1)
+
+            birthday: new Date(1990,0,1)
+
+            testDevices: [
+                "6CFCACF9CB1F59428D60EFEDF19BD967"
+            ]
 
             keywords: [
                 "AdMob",
@@ -138,15 +143,20 @@ Page {
         onClosed: load()
 
         request: AdMobRequest {
-            gender: AdMob.GenderFemale
-            childDirectedTreatment: AdMob.ChildDirectedTreatmentTagged
+            gender: AdMobRequest.GenderFemale
+            childDirectedTreatment: AdMobRequest.ChildDirectedTreatmentTagged
 
             // NOTE remember JS Date months are 0 based
             // 8th of December 1979:
             birthday: new Date(1979,11,8)
 
+            testDevices: [
+                "6CFCACF9CB1F59428D60EFEDF19BD967"
+            ]
+
             keywords: [
                 "Perfume",
+                "Game",
                 "Scent"
             ]
 
@@ -201,15 +211,19 @@ Page {
         onClosed: load()
 
         request: AdMobRequest {
-            gender: AdMob.GenderUnknown
-            childDirectedTreatment: AdMob.ChildDirectedTreatmentUnknown
+            gender: AdMobRequest.GenderUnknown
+            childDirectedTreatment: AdMobRequest.ChildDirectedTreatmentUnknown
 
+            testDevices: [
+                "6CFCACF9CB1F59428D60EFEDF19BD967"
+            ]
             // NOTE remember JS Date months are 0 based
             // 8th of December 1979:
             birthday: new Date(1979,11,8)
 
             keywords: [
                 "Qt",
+                "Game",
                 "Firebase"
             ]
 

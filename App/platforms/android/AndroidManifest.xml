@@ -7,14 +7,10 @@
 
         <!-- See https://developers.google.com/admob/android/quick-start#update_your_androidmanifestxml -->
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
-        <meta-data
-            android:name="com.google.android.gms.ads.ca-app-pub-6606648560678905~6485875670"
-            android:value="com.blackgrain.android.firebasetest"/>
+        <meta-data android:name="com.google.android.gms.ads.ca-app-pub-6606648560678905~6485875670" android:value="com.blackgrain.android.firebasetest"/>
 
         <!-- See https://developers.google.com/ad-manager/mobile-ads-sdk/android/quick-start#update_your_androidmanifestxml -->
-        <meta-data
-            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
-            android:value="true"/>
+        <meta-data android:name="com.google.android.gms.ads.AD_MANAGER_APP" android:value="true"/>
 
 
         <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation" android:name="com.blackgrain.android.firebasetest.Main" android:label="@string/app_name" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:launchMode="singleTop">
@@ -75,7 +71,7 @@
         </service>
 
     </application>
-    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="23"/>
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="28"/>
     <supports-screens android:largeScreens="true" android:normalScreens="true" android:anyDensity="true" android:smallScreens="true"/>
 
     <!-- The following comment will be replaced upon deployment with default permissions based on the dependencies of the application.

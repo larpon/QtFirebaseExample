@@ -261,8 +261,8 @@ ApplicationWindow {
         }
 
         request: AdMobRequest {
-            gender: AdMob.GenderMale
-            childDirectedTreatment: AdMob.ChildDirectedTreatmentUnknown
+            gender: AdMobRequest.GenderMale
+            childDirectedTreatment: AdMobRequest.ChildDirectedTreatmentUnknown
 
             // NOTE remember JS Date months are 0 based
             // 1st of Januray 1980:
@@ -274,7 +274,8 @@ ApplicationWindow {
                 "Qt",
                 "Fun",
                 "Test",
-                "Firebase"
+                "Firebase",
+                "Game"
             ]
 
             extras: [
