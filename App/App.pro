@@ -29,10 +29,10 @@ android: {
     versionAtLeast(QT_VERSION, 5.14)
     {
         ANDROID_PACKAGE_SOURCE_DIR = $$PLATFORMS_DIR/android-qt5.14+
-        warning("Use at least Qt version 5.11.2")
     }
     !versionAtLeast(QT_VERSION, 5.14) {
         ANDROID_PACKAGE_SOURCE_DIR = $$PLATFORMS_DIR/android
+        warning("It is advised to use Qt version 5.14 and above, as it provides the new .aab bundle. This is much easier to work with concerning publishing your app in the Play Store.")
     }
 
     DISTFILES += \
