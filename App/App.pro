@@ -89,6 +89,7 @@ ios: {
 ################ PROJECT SRC HERE ################
 # Includes QtFirebase:
 include(../extensions/QtFirebase/qtfirebase.pri)
+include(../extensions/android_openssl/openssl.pri)
 
 SOURCES += \
     main.cpp
