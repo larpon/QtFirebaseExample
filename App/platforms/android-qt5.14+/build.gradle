@@ -1,0 +1,221 @@
+buildscript {
+    repositories {
+        google()
+        // You can search here for sdk's
+        // http://search.maven.org/
+        mavenLocal()
+
+        // You can search here for sdk's
+        // https://bintray.com/bintray/jcenter
+        jcenter()
+
+        flatDir {
+            dirs System.getProperty("user.dir") + '/libs'
+        }
+    }
+
+    dependencies {
+        // You can update gradle by changing build-folder/android-build/gradle/wrapper/gradle-wrapper.properties
+	classpath 'com.android.tools.build:gradle:3.5.0'
+	classpath 'com.google.gms:google-services:4.0.2'
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        jcenter()
+
+        maven { url "https://maven.google.com" }
+
+        flatDir {
+            dirs System.getProperty("user.dir") + '/libs'
+        }
+    }
+
+    /*
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:deprecation"
+        }
+    }
+    */
+}
+
+apply plugin: 'com.android.application'
+
+
+android {
+    /*******************************************************
+     * The following variables:
+     * - androidBuildToolsVersion,
+     * - androidCompileSdkVersion
+     * - qt5AndroidDir - holds the path to qt android files
+     *                   needed to build any Qt application
+     *                   on Android.
+     *
+     * are defined in gradle.properties file. This file is
+     * updated by QtCreator and androiddeployqt tools.
+     * Changing them manually might break the compilation!
+     *******************************************************/
+
+    compileSdkVersion androidCompileSdkVersion.toInteger()
+
+    // Android Gradle Plugin now has default versions of buildTools
+    //buildToolsVersion androidBuildToolsVersion
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = [qt5AndroidDir + '/src', 'src', 'java']
+            aidl.srcDirs = [qt5AndroidDir + '/src', 'src', 'aidl']
+            res.srcDirs = [qt5AndroidDir + '/res', 'res']
+            resources.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+       }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    // Do not compress Qt binary resources file
+    aaptOptions {
+        noCompress 'rcc'
+    }
+
+    dexOptions {
+        preDexLibraries = false
+    }
+
+    defaultConfig {
+        applicationId "com.blackgrain.android.firebasetest" // Used by Firebase auto-config (the google-services.json from Firebase console)
+        //minSdkVersion 14
+        //targetSdkVersion 25
+        //versionCode 1
+        //versionName "1.0"
+
+        //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
+
+        // Enabling multidex support.
+        multiDexEnabled = true
+
+    }
+}
+
+// Pre-experimental Gradle plug-in NDK boilerplate below.
+// Right now the Firebase plug-in does not work with the experimental
+// Gradle plug-in so we're using ndk-build for the moment.
+project.ext {
+    // Configure the Firebase C++ SDK location.
+    firebase_cpp_sdk_dir = System.getProperty('firebase_cpp_sdk.dir')
+    firebaseSdkUsed = 'system property firebase_cpp_sdk.dir'
+
+    if (firebase_cpp_sdk_dir == null || firebase_cpp_sdk_dir.isEmpty()) {
+        firebase_cpp_sdk_dir = System.getenv('FIREBASE_CPP_SDK_DIR')
+        firebaseSdkUsed = 'system env variable FIREBASE_CPP_SDK_DIR'
+        if (firebase_cpp_sdk_dir == null || firebase_cpp_sdk_dir.isEmpty()) {
+            if ((new File('firebase_cpp_sdk')).exists()) {
+                firebase_cpp_sdk_dir = 'firebase_cpp_sdk'
+            } else {
+                throw new StopActionException(
+                    'firebase_cpp_sdk.dir property or the FIREBASE_CPP_SDK_DIR ' +
+                    'environment variable must be set to reference the Firebase C++ ' +
+                    'SDK install directory.  This is used to configure static library ' +
+                    'and C/C++ include paths for the SDK.'
+                )
+            }
+        }
+    }
+
+    if (!(new File(firebase_cpp_sdk_dir)).exists()) {
+        throw new StopActionException(
+            sprintf('Firebase C++ SDK directory %s does not exist', firebase_cpp_sdk_dir)
+        )
+    }
+    println 'QtFirebase using Firebase C++ SDK located in ' + firebase_cpp_sdk_dir + ' (from ' + firebaseSdkUsed + ')'
+
+    // Check the NDK location using the same configuration options as the
+    // experimental Gradle plug-in.
+    def ndkDir = android.ndkDirectory
+    ndkUsed = 'android.ndkDirectory'
+
+    if (ndkDir == null || !ndkDir.exists()) {
+        ndkDir = new File(System.getProperty('ndk_dir'))
+        ndkUsed = 'system property ndk_dir'
+    }
+    if (ndkDir == null || !ndkDir.exists()) {
+        ndkDir = new File(System.getenv('ANDROID_NDK_HOME'))
+        ndkUsed = 'system env variable ANDROID_NDK_HOME'
+    }
+    if (ndkDir == null || !ndkDir.exists()) {
+        throw new StopActionException(
+            'Android NDK directory should be specified using the ndkDir ' +
+            'property or ANDROID_NDK_HOME environment variable.'
+        )
+    }
+    println 'QtFirebase (Firebase C++ SDK) using Android NDK located in ' + ndkDir + ' (from ' + ndkUsed + ')'
+
+}
+
+repositories {
+    flatDir {
+        dirs project.ext.firebase_cpp_sdk_dir + "/libs/android"
+    }
+}
+
+/*
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-v4:27.1.0'
+    }
+}*/
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation fileTree(dir: 'src', include: ['*.jar'])
+
+    //implementation 'com.android.support:appcompat-v7:27.1.1'
+
+    /* Deprecated / old way. Use "apply from" as below
+    implementation 'com.google.android.gms:play-services-base:15.0.1'  // Mandatory - Firebase rely on Google Play services
+
+    // For AdMob support
+    implementation 'com.google.firebase:firebase-ads:15.0.1'
+
+    // For Google Analytics support
+    implementation 'com.google.firebase:firebase-core:16.0.1'         // Recommended package
+    // implementation 'com.google.firebase:firebase-analytics:12.+' // deprecated
+
+    // For RemoteConfig support
+    implementation 'com.google.firebase:firebase-config:16.0.0'
+
+    // For Messaging support
+    implementation 'com.google.firebase.messaging.cpp:firebase_messaging_cpp@aar'
+    implementation 'com.google.firebase:firebase-messaging:17.1.0'
+
+    // For Auth support
+    implementation 'com.google.firebase:firebase-auth:16.0.2'
+
+    // For Database support
+    implementation 'com.google.firebase:firebase-database:16.0.1'
+
+    implementation 'com.google.firebase:firebase-common:16.0.0'
+    */
+}
+
+apply from: "$gradle.firebase_cpp_sdk_dir/Android/firebase_dependencies.gradle"
+firebaseCpp.dependencies {
+  admob
+  analytics
+  auth // auth / database
+  database
+  remoteConfig
+  messaging
+}
+
+apply plugin: 'com.google.gms.google-services'

@@ -1,38 +1,39 @@
 TEMPLATE = app
 
+################ DEFINES HERE ################
 QT += gui qml quick multimedia
 !no_desktop: QT += widgets
-
 CONFIG += c++11
-
 # Additional import path used to resolve QML modules in Qt Creator's code model
 # QML_IMPORT_PATH =
+# Make version info available to C++ and QML
+VERSION = 1.2.5
+GIT_VERSION_ROOT = $$PWD/..
+PLATFORMS_DIR = $$PWD/platforms
+# Make these modules of QtFirebase
+# NOTE QTFIREBASE_SDK_PATH can be symlinked to match $$PWD/firebase_cpp_sdk
+QTFIREBASE_CONFIG += analytics messaging admob remote_config auth database
+# Disable fixes for know problems
+# DEFINES += QTFIREBASE_DISABLE_FIX_ANDROID_AUTO_APP_STATE_VISIBILTY
 
+################ INCLUDES HERE ################
 # IMPORTANT must be included before extensions/vendor
 # Default rules for deployment.
 include(deployment.pri)
 
-
-# Make version info available to C++ and QML
-VERSION = 1.2.5
-
-GIT_VERSION_ROOT = $$PWD/..
 include(../extensions/gitversion.pri)
-
 message("QtFirebaseExample $$VERSION git $$GIT_VERSION/$$GIT_BRANCH")
 
-PLATFORMS_DIR = $$PWD/platforms
-
-
-SOURCES += \
-    main.cpp
-
-
-PLATFORMS_DIR = $$PWD/platforms
-
+################ TARGETS HERE ################
 android: {
-
-    ANDROID_PACKAGE_SOURCE_DIR = $$PLATFORMS_DIR/android
+    versionAtLeast(QT_VERSION, 5.14)
+    {
+        ANDROID_PACKAGE_SOURCE_DIR = $$PLATFORMS_DIR/android-qt5.14+
+    }
+    !versionAtLeast(QT_VERSION, 5.14) {
+        ANDROID_PACKAGE_SOURCE_DIR = $$PLATFORMS_DIR/android
+        warning("It is advised to use Qt version 5.14 and above, as it provides the new .aab bundle. This is much easier to work with concerning publishing your app in the Play Store.")
+    }
 
     DISTFILES += \
         $$ANDROID_PACKAGE_SOURCE_DIR/AndroidManifest.xml \
@@ -44,6 +45,7 @@ android: {
         $$ANDROID_PACKAGE_SOURCE_DIR/src/com/blackgrain/android/firebasetest/Main.java \
         $$ANDROID_PACKAGE_SOURCE_DIR/res/values/apptheme.xml \
         $$ANDROID_PACKAGE_SOURCE_DIR/res/values/strings.xml \
+        $$ANDROID_PACKAGE_SOURCE_DIR/res/values/libs.xml \
         $$ANDROID_PACKAGE_SOURCE_DIR/res/drawable/splash.xml \
         $$ANDROID_PACKAGE_SOURCE_DIR/gradlew \
         $$ANDROID_PACKAGE_SOURCE_DIR/gradlew.bat \
@@ -84,15 +86,13 @@ ios: {
     QMAKE_MAC_XCODE_SETTINGS += APP_ENTITLEMENTS
 }
 
-# Make these modules of QtFirebase
-# NOTE QTFIREBASE_SDK_PATH can be symlinked to match $$PWD/firebase_cpp_sdk
-QTFIREBASE_CONFIG += analytics messaging admob remote_config auth database
-
-# Disable fixes for know problems
-# DEFINES += QTFIREBASE_DISABLE_FIX_ANDROID_AUTO_APP_STATE_VISIBILTY
-
+################ PROJECT SRC HERE ################
 # Includes QtFirebase:
 include(../extensions/QtFirebase/qtfirebase.pri)
+include(../extensions/android_openssl/openssl.pri)
+
+SOURCES += \
+    main.cpp
 
 RESOURCES += \
     qml.qrc
